@@ -1,0 +1,163 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Practice.MinimalWebApi | v1",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/echo": {
+      "post": {
+        "tags": [
+          "Echo"
+        ],
+        "summary": "Echo",
+        "description": "Echo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "echo"
+                ],
+                "type": "object",
+                "properties": {
+                  "echo": {
+                    "$ref": "#/components/schemas/string2"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "echo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "echo": {
+                      "$ref": "#/components/schemas/string2"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "$ref": "#/components/schemas/string"
+                    },
+                    "title": {
+                      "$ref": "#/components/schemas/string"
+                    },
+                    "status": {
+                      "$ref": "#/components/schemas/int?"
+                    },
+                    "detail": {
+                      "$ref": "#/components/schemas/string"
+                    },
+                    "instance": {
+                      "$ref": "#/components/schemas/string"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/string2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "int?": {
+        "type": "integer",
+        "format": "int32",
+        "nullable": true
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/string"
+          },
+          "title": {
+            "$ref": "#/components/schemas/string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/int?"
+          },
+          "detail": {
+            "$ref": "#/components/schemas/string"
+          },
+          "instance": {
+            "$ref": "#/components/schemas/string"
+          }
+        }
+      },
+      "string": {
+        "type": "string",
+        "nullable": true
+      },
+      "string2": {
+        "type": "string"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Echo"
+    }
+  ]
+}
